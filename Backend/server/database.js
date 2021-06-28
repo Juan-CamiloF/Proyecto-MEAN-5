@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 //Conexión a base de datos
 mongoose
-  .connect("mongodb://127.0.0.1:27017/pruebaTecnica", {
+  .connect("mongodb://127.0.0.1:27017/proyecto5", {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
