@@ -1,0 +1,31 @@
+h2{
+    text-align: center;
+    margin: 15px 0;
+}
+.form{
+    width: 500px;
+    margin: 0 auto;
+}
+mat-card-title{
+    font-size: 15px;
+}
+mat-card{
+    display: flex;
+    justify-content: space-between;
+}
+.icons{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.icono{
+    margin:  0 15px;
+    cursor: pointer;
+}
+.icono:hover{
+    color:rgb(116, 174, 221);
+}
+.modal > mat-dialog-conteiner {
+    background-color: red;
+  }
+  

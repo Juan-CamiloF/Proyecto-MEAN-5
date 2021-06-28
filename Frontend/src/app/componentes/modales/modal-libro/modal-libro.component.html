@@ -1,0 +1,55 @@
+<div mat-dialog-content>
+    <div class="form">
+        <h2>Formulario Libros</h2>
+        <form (ngSubmit)="actualizar()" [formGroup]="formulario">
+            <mat-form-field appearance="fill">
+                <mat-label>* Titulo</mat-label>
+                <input matInput formControlName="titulo" />
+                <mat-error *ngIf="f.titulo.hasError('required')">El campo es requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Año de publicación</mat-label>
+                <input matInput formControlName="anio" [valueAsNumber]/>
+                <mat-error *ngIf="f.anio.hasError('required')">El campo es requerido</mat-error>
+                <mat-error *ngIf="f.anio.hasError('pattern')"> Eso NO es un año</mat-error>
+                <mat-error *ngIf="f.anio.hasError('max')"> El año no ha empezado</mat-error>
+                <mat-error *ngIf="f.anio.hasError('min')"> El año es muy antiguo</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Genero</mat-label>
+                <input matInput formControlName="genero" />
+                <mat-error *ngIf="f.genero.hasError('required')">El campo es requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Número de páginas</mat-label>
+                <input matInput formControlName="numeroPaginas" />
+                <mat-error *ngIf="f.numeroPaginas.hasError('required')">El campo es requerido</mat-error>
+                <mat-error *ngIf="f.numeroPaginas.hasError('pattern')"> No es un número</mat-error>
+                <mat-error *ngIf="f.numeroPaginas.hasError('min')">El libro tiene muy pocas páginas</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Autor</mat-label>
+                <input matInput formControlName="autor" [matAutocomplete]="auto1"/>
+                <mat-autocomplete  #auto1="matAutocomplete">
+                    <mat-option *ngFor="let autores of filtroAutores | async"  [value]="autores.nombreCompleto">
+                        {{autores.nombreCompleto}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="f.autor.hasError('required')">El campo es requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Editorial</mat-label>
+                <input matInput formControlName="editorial" [matAutocomplete]="auto2"/>
+                <mat-autocomplete  #auto2="matAutocomplete">
+                    <mat-option *ngFor="let editorial of filtroEditoriales | async"  [value]="editorial.nombre">
+                        {{editorial.nombre}}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="f.autor.hasError('required')">El campo es requerido</mat-error>
+            </mat-form-field>
+            <div class="btns">
+                <input class="btn" type="submit" value="Actualizar">
+                <input class="btn" type="button" value="Cancelar" [mat-dialog-close]="true">
+            </div>
+        </form>
+</div>

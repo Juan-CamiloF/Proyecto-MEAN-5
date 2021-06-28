@@ -1,0 +1,34 @@
+<div mat-dialog-content>
+    <div class="form">
+        <h2>Formulario autores</h2>
+        <form (ngSubmit)="actualizar()" [formGroup]="formulario">
+            <mat-form-field appearance="fill">
+                <mat-label>* Nombre Completo</mat-label>
+                <input matInput formControlName="nombreCompleto" />
+                <mat-error *ngIf="f.nombreCompleto.hasError('required')"> El campo es requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Fecha de nacimiento</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="fechaDeNacimiento">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="f.fechaDeNacimiento.hasError('required')"> El campo es requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Ciudad de nacimiento</mat-label>
+                <input matInput formControlName="ciudadDeProcedencia" placeholder="dd/mm/yyyy" />
+                <mat-error *ngIf="f.ciudadDeProcedencia.hasError('required')"> El campo es requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Correo electrónico</mat-label>
+                <input matInput formControlName="correoElectronico" />
+                <mat-error *ngIf="f.correoElectronico.hasError('required')"> El campo es requerido</mat-error>
+                <mat-error *ngIf="f.correoElectronico.hasError('email')"> Correo electrónico invalido</mat-error>
+            </mat-form-field>
+            <div class="btns">
+                <input type="submit" class="btn" value="Registrar">
+                <input type="button" class="btn" value="Cancelar" [mat-dialog-close]="true">
+            </div>
+        </form>
+    </div>
+</div>

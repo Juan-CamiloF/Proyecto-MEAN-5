@@ -1,0 +1,37 @@
+<div mat-dialog-content class="contenedor" >
+        <h2>Formulario editoriales</h2>
+        <form (ngSubmit)="actualizar()"  [formGroup]="formulario">
+            <mat-form-field appearance="fill">
+                <mat-label>* Nombre</mat-label>
+                <input matInput formControlName="nombre" />
+                <mat-error *ngIf="f.nombre.hasError('required')"> El campo es requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Dirección</mat-label>
+                <input matInput formControlName="direccion" />
+                <mat-error *ngIf="f.direccion.hasError('required')"> El campo es requerido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Telefono Móvil</mat-label>
+                <input matInput formControlName="telefono" placeholder="3001231231" />
+                <mat-error *ngIf="f.telefono.hasError('required')"> El campo es requerido</mat-error>
+                <mat-error *ngIf="f.telefono.hasError('pattern')"> El formato no es correcto</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Correo electrónico</mat-label>
+                <input matInput formControlName="correoElectronico" />
+                <mat-error *ngIf="f.correoElectronico.hasError('required')"> El campo es requerido</mat-error>
+                <mat-error *ngIf="f.correoElectronico.hasError('email')"> Correo electrónico invalido</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>* Máximo de libros</mat-label>
+                <input matInput formControlName="maximoDeLibros" type="number" placeholder=" (Si no tiene un máximo: -1)"/>
+                <mat-error *ngIf="f.maximoDeLibros.hasError('required')"> El campo es requerido</mat-error>
+                <mat-error *ngIf="f.maximoDeLibros.hasError('pattern')"> El número no es valido</mat-error>
+            </mat-form-field>
+            <div class="btns">
+                <input type="submit" class="btn" value="Actualizar">
+                <input type="button" class="btn" value="Cancelar" [mat-dialog-close]="true">
+            </div>
+        </form>
+</div>

@@ -1,0 +1,75 @@
+<mat-tab-group>
+    <mat-tab label="Registrar autores">
+        <div class="form">
+            <h2>Formulario autores</h2>
+            <form #formDirective="ngForm" (ngSubmit)="agregar(formulario,formDirective)" [formGroup]="formulario">
+                <mat-form-field appearance="fill">
+                    <mat-label>* Nombre Completo</mat-label>
+                    <input matInput formControlName="nombreCompleto" />
+                    <mat-error *ngIf="f.nombreCompleto.hasError('required')"> El campo es requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>* Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy"
+                        formControlName="fechaDeNacimiento" [max]="maxDate" [min]="minDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="f.fechaDeNacimiento.hasError('required')"> El campo es requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>* Ciudad de nacimiento</mat-label>
+                    <input matInput formControlName="ciudadDeProcedencia" />
+                    <mat-error *ngIf="f.ciudadDeProcedencia.hasError('required')"> El campo es requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>* Correo electrónico</mat-label>
+                    <input matInput formControlName="correoElectronico" />
+                    <mat-error *ngIf="f.correoElectronico.hasError('required')"> El campo es requerido</mat-error>
+                    <mat-error *ngIf="f.correoElectronico.hasError('email')"> Correo electrónico invalido</mat-error>
+                </mat-form-field>
+                <div class="btns">
+                    <input type="submit" class="btn" value="Registrar">
+                    <input type="reset" class="btn" value="Borrar">
+                </div>
+            </form>
+        </div>
+    </mat-tab>
+    <mat-tab label="Lista de autores">
+        <h2>Autores</h2>
+        <div *ngIf="listaAutores.length">
+            <div class="buscador">
+                <mat-icon class="material-icons-outlined">
+                    search
+                </mat-icon>
+                <mat-form-field appearance="fill">
+
+                    <mat-label>Buscar</mat-label>
+                    <input matInput [(ngModel)]="filtro">
+                </mat-form-field>
+            </div>
+            <div *ngFor="let autor of listaAutores | filter:filtro">
+                <mat-card>
+                    <div>
+                        <mat-card-title>Nombre: {{autor.nombreCompleto}}</mat-card-title>
+                        <mat-card-subtitle>Ciudad de procedencia: {{autor.ciudadDeProcedencia}}</mat-card-subtitle>
+                        <mat-card-content>
+                            <p> Fecha de nacimiento: {{autor.fechaDeNacimiento | date: 'mediumDate'}} <br> Correo
+                                electrónico: {{autor.correoElectronico}}</p>
+                        </mat-card-content>
+                    </div>
+                    <div class="icons">
+                        <mat-icon (click)="actualizar(autor)" class="material-icons-outlined icono">
+                            edit
+                        </mat-icon>
+                        <mat-icon (click)="eliminar(autor)" class="material-icons-outlined icono">
+                            delete
+                        </mat-icon>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        <div *ngIf="listaAutores.length == 0">
+            <p>No hay autores registrados en el sistema</p>
+        </div>
+    </mat-tab>
+</mat-tab-group>

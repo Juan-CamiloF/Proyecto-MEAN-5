@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+mat-form-field {
+  width: 250px;
+  margin: 5px 0;
+}
+.btns {
+  display: flex;
+  justify-content: space-between;
+}
+.btn {
+  outline: none;
+  background: none;
+  border: 2px solid rgb(12, 61, 100);
+  border-radius: 5px;
+  padding: 5px;
+  margin: 0 15px;
+}
+.btn:hover {
+  background: rgb(12, 61, 100);
+  color: #fff;
+  cursor: pointer;
+}

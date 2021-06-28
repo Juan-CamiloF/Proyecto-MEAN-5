@@ -1,0 +1,79 @@
+<mat-tab-group>
+    <mat-tab label="Registrar editoriales"> 
+        <div class="form">
+            <h2>Formulario editoriales</h2>
+            <form (ngSubmit)="agregar(formulario,formDirective)" [formGroup]="formulario" #formDirective="ngForm">
+                <mat-form-field appearance="fill">
+                    <mat-label>* Nombre</mat-label>
+                    <input matInput formControlName="nombre" />
+                    <mat-error *ngIf="f.nombre.hasError('required')"> El campo es requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>* Dirección</mat-label>
+                    <input matInput formControlName="direccion" />
+                    <mat-error *ngIf="f.direccion.hasError('required')"> El campo es requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>* Telefono Móvil</mat-label>
+                    <input matInput formControlName="telefono" placeholder="3001231231" />
+                    <mat-error *ngIf="f.telefono.hasError('required')"> El campo es requerido</mat-error>
+                    <mat-error *ngIf="f.telefono.hasError('minlength')"> El formato no es correcto</mat-error>
+                    <mat-error *ngIf="f.telefono.hasError('maxlength')"> El formato no es correcto</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>* Correo electrónico</mat-label>
+                    <input matInput formControlName="correoElectronico" />
+                    <mat-error *ngIf="f.correoElectronico.hasError('required')"> El campo es requerido</mat-error>
+                    <mat-error *ngIf="f.correoElectronico.hasError('email')"> Correo electrónico invalido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>* Máximo de libros</mat-label>
+                    <input matInput formControlName="maximoDeLibros" type="number" placeholder=" (Si no tiene un máximo: -1)"/>
+                    <mat-error *ngIf="f.maximoDeLibros.hasError('required')"> El campo es requerido</mat-error>
+                    <mat-error *ngIf="f.maximoDeLibros.hasError('pattern')"> El número no es valido</mat-error>
+                </mat-form-field>
+                <div class="btns">
+                    <input type="submit" class="btn" value="Registrar">
+                    <input type="reset" class="btn" value="Borrar">
+                </div>
+            </form>
+        </div>
+    </mat-tab>
+    <mat-tab label="Lista de editoriales"> 
+        <h2>Editoriales</h2>
+        <div *ngIf="listaEditoriales.length">
+            <div class="buscador">
+                <mat-icon class="material-icons-outlined">
+                    search
+                </mat-icon>
+                <mat-form-field appearance="fill">
+                    <mat-label>Buscar</mat-label>
+                    <input matInput [(ngModel)]="filtro">
+                </mat-form-field>
+            </div>
+            <div *ngFor="let editorial of listaEditoriales | filter:filtro">
+                <mat-card>
+                    <div>
+                        <mat-card-title>Nombre: {{editorial.nombre}}</mat-card-title>
+                        <mat-card-subtitle>Ciudad de procedencia: {{editorial.direccion}} <br> Máximo de libros: {{editorial.maximoDeLibros}}</mat-card-subtitle>
+                        <mat-card-content>
+                            <p> Teléfono: {{editorial.telefono}} <br> Correo
+                                electrónico: {{editorial.correoElectronico}}</p>
+                        </mat-card-content>
+                    </div>
+                    <div class="icons">
+                        <mat-icon (click)="actualizar(editorial)" class="material-icons-outlined icono">
+                            edit
+                        </mat-icon>
+                        <mat-icon (click)="eliminar(editorial)" class="material-icons-outlined icono">
+                            delete
+                        </mat-icon>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        <div *ngIf="listaEditoriales.length == 0">
+            <p>No hay editoriales registrados en el sistema</p>
+        </div>
+    </mat-tab>
+  </mat-tab-group>
