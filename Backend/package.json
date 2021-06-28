@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "PruebaTecnica",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon server/index.js"
+  },
+  "author": "Juan Camilo Fandiño Benavides",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.14"
+  }
+}
